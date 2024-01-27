@@ -102,7 +102,7 @@ export const headerMenuConfig: IHeaderMenu[] = [
       },
       {
         title: '跃迁',
-        icon: h(FaTrainSubway),
+        icon: h(FaSolidTrainSubway),
         path: 'https://www.travellings.cn/go.html',
       },
       {
