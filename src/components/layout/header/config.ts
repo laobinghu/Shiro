@@ -108,7 +108,7 @@ export const headerMenuConfig: IHeaderMenu[] = [
         path: 'https://www.travellings.cn/go.html',
       },
       {
-        title: '十年之约-虫洞',
+        title: '虫洞',
         icon: h(FaSolidUserGroup),
         path: 'https://www.foreverblog.cn/go.html',
       },
