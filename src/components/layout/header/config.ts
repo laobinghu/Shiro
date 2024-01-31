@@ -10,6 +10,7 @@ import {
   FaSolidHistory,
   FaSolidUserFriends,
   FaSolidTrainSubway,
+  FaSolidUserGroup,
   IcTwotoneSignpost,
   IonBook,
   MdiFlask,
@@ -105,6 +106,11 @@ export const headerMenuConfig: IHeaderMenu[] = [
         title: '开往',
         icon: h(FaSolidTrainSubway),
         path: 'https://www.travellings.cn/go.html',
+      },
+      {
+        title: '十年之约-虫洞',
+        icon: h(FaSolidUserGroup),
+        path: 'https://www.foreverblog.cn/go.html',
       },
       {
         title: '跃迁',
