@@ -170,7 +170,7 @@ const FooterBottom = async () => {
           </SubscribeTextButton>
         </span>
         <span className="mt-3 block md:mt-0 md:inline">
-          Stay hungry. Stay foolish.
+          No pains, no gains.
         </span>
       </p>
       <p>
@@ -186,7 +186,7 @@ const FooterBottom = async () => {
 
         <Divider className="hidden md:inline" />
         <GatewayCount />
-        {/* {!!lastVisitor && (
+        { {!!lastVisitor && (
           <>
             <Divider />
             <span>
@@ -197,7 +197,7 @@ const FooterBottom = async () => {
                 .join(', ')}
             </span>
           </>
-        )} */}
+        )} }
       </p>
     </div>
   )
