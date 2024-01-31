@@ -186,7 +186,7 @@ const FooterBottom = async () => {
 
         <Divider className="hidden md:inline" />
         <GatewayCount />
-        { {!!lastVisitor && (
+        {/* {!!lastVisitor && (
           <>
             <Divider />
             <span>
@@ -197,7 +197,7 @@ const FooterBottom = async () => {
                 .join(', ')}
             </span>
           </>
-        )} }
+        )} */}
       </p>
     </div>
   )
