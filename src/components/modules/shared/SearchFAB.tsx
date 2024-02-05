@@ -17,11 +17,15 @@ import { atom, useAtomValue, useSetAtom } from 'jotai'
 import Link from 'next/link'
 import type { KeyboardEventHandler } from 'react'
 
+import { useIsLogged } from '~/atoms'
 import { EmptyIcon } from '~/components/icons/empty'
+import { MotionButtonBase } from '~/components/ui/button'
 import { FABPortable } from '~/components/ui/fab'
+import { FloatPopover } from '~/components/ui/float-popover'
 import { microDampingPreset } from '~/constants/spring'
 import useDebounceValue from '~/hooks/common/use-debounce-value'
 import { useIsClient } from '~/hooks/common/use-is-client'
+import { getToken } from '~/lib/cookie'
 import { noopArr } from '~/lib/noop'
 import { apiClient } from '~/lib/request'
 import { jotaiStore } from '~/lib/store'
@@ -212,6 +216,8 @@ const SearchPanelImpl = () => {
     [data.length],
   )
 
+  const isLogged = useIsLogged()
+
   return (
     <m.div
       className={clsx(
@@ -261,9 +267,9 @@ const SearchPanelImpl = () => {
               <div className="flex flex-col items-center space-y-2">
                 {!keyword ? (
                   <i className="icon-[mingcute--search-line] text-[60px]" />
-                ) : !isLoading ? (
+                ) : (
                   <EmptyIcon />
-                ) : null}
+                )}
 
                 {!data && isLoading && isFetching && (
                   <div className="loading-dots text-[30px]" />
@@ -276,10 +282,36 @@ const SearchPanelImpl = () => {
               return <SearchItem key={item.id} {...item} index={index} />
             })
           )}
+
+          {data.length === 0 && isLoading && (
+            <div className="flex h-full flex-grow center">
+              <div className="loading loading-spinner" />
+            </div>
+          )}
         </ul>
       </div>
 
-      <div className="flex flex-shrink-0 items-center justify-end px-4 py-2">
+      <div className="flex flex-shrink-0 items-center justify-between px-4 py-2">
+        {isLogged ? (
+          <MotionButtonBase
+            onClick={() => {
+              window.open(
+                `${apiClient.search.proxy('algolia')('import-json').toString(true)}?token=${getToken()}`,
+              )
+            }}
+          >
+            <FloatPopover
+              type="tooltip"
+              triggerElement={
+                <i className="icon-[mingcute--download-2-line]" />
+              }
+            >
+              下载搜索索引文件以便导入 algolia 搜索
+            </FloatPopover>
+          </MotionButtonBase>
+        ) : (
+          <div />
+        )}
         <a
           href="https://www.algolia.com"
           target="_blank"
