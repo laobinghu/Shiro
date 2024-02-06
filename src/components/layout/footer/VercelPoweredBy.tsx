@@ -20,7 +20,7 @@ export const VercelPoweredBy = () => {
       alt="本站由无畏云提供CDN加速服务"
       tabIndex={0}
       onClick={() => {
-        window.open('https://www.sctes.com/')
+        window.open('su.sctes.com/register?code=8xsqfd9uyzpjg')
       }}
     />
   )
