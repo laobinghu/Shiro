@@ -5,7 +5,7 @@ import { useAppConfigSelector } from '~/providers/root/aggregation-data-provider
 const isVercelEnv = !!process.env.NEXT_PUBLIC_VERCEL_ENV
 export const VercelPoweredBy = () => {
   const isSettingToDisplay = useAppConfigSelector(
-    (s) => s.poweredBy?.vercel || false,
+    (s) => s.poweredBy?.vercel || true,
   )
 
   const shouldDisplay = isVercelEnv && isSettingToDisplay
