@@ -1,14 +1,15 @@
 import { Excalidraw as Board, exportToBlob } from '@excalidraw/excalidraw'
-import type { ExcalidrawElement } from '@excalidraw/excalidraw/types/element/types'
+import type { ExcalidrawElement } from '@excalidraw/excalidraw/element/types'
 import type {
   AppState,
   BinaryFiles,
   ExcalidrawImperativeAPI,
-} from '@excalidraw/excalidraw/types/types'
+} from '@excalidraw/excalidraw/types'
 import { useQuery } from '@tanstack/react-query'
 import type { Delta } from 'jsondiffpatch'
 import { patch } from 'jsondiffpatch'
-import React, { forwardRef, useImperativeHandle, useMemo, useRef } from 'react'
+import * as React from 'react'
+import { forwardRef, useImperativeHandle, useMemo, useRef } from 'react'
 
 import { useIsMobile } from '~/atoms/hooks'
 import { API_URL } from '~/constants/env'
@@ -168,7 +169,7 @@ const ExcalidrawImpl = forwardRef<InternelExcalidrawRefObject, ExcalidrawProps>(
         className={clsxm('relative h-[500px] w-full', className)}
       >
         {isLoading && (
-          <div className="absolute inset-0 z-10 flex center">
+          <div className="center absolute inset-0 z-10 flex">
             <div className="loading loading-spinner" />
           </div>
         )}
@@ -210,7 +211,7 @@ const ExcalidrawImpl = forwardRef<InternelExcalidrawRefObject, ExcalidrawProps>(
                   elements,
                   files: null,
                 })
-                blob.then((blob) => {
+                blob.then((blob: Blob) => {
                   win?.location.replace(URL.createObjectURL(blob))
                 })
               } else {
@@ -235,7 +236,7 @@ const ExcalidrawImpl = forwardRef<InternelExcalidrawRefObject, ExcalidrawProps>(
               'dark:border-neutral-800 dark:text-zinc-500',
             )}
           >
-            <i className="icon-[mingcute--external-link-line]" />
+            <i className="i-mingcute-external-link-line" />
           </MotionButtonBase>
         )}
       </div>

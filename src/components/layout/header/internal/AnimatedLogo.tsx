@@ -1,12 +1,13 @@
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
-import { AnimatePresence, m } from 'framer-motion'
+import { AnimatePresence, m } from 'motion/react'
 import { useRouter } from 'next/navigation'
 import { useCallback } from 'react'
 
 import { isLogged } from '~/atoms'
 import { useResolveAdminUrl, useViewport } from '~/atoms/hooks'
+import { useIsClient } from '~/hooks/common/use-is-client'
 import { useSingleAndDoubleClick } from '~/hooks/common/use-single-double-click'
 import { noopObj } from '~/lib/noop'
 import { Routes } from '~/lib/route-builder'
@@ -63,6 +64,9 @@ export const AnimatedLogo = () => {
 
   const isDesktop = useViewport(($) => $.lg && $.w !== 0)
 
+  const isClient = useIsClient()
+  if (!isClient) return null
+
   if (isDesktop)
     return (
       <>
@@ -79,7 +83,7 @@ export const AnimatedLogo = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="flex items-center"
+          className="flex items-center !will-change-[unset]"
         >
           <Activity />
           <TapableLogo />

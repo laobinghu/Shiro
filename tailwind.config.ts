@@ -1,12 +1,11 @@
+import './plugins/tw-css-plugin'
+
+import { getIconCollections, iconsPlugin } from '@egoist/tailwindcss-icons'
+import typography from '@tailwindcss/typography'
 import daisyui from 'daisyui'
 import { withTV } from 'tailwind-variants/transformer'
 import type { Config } from 'tailwindcss'
-import type { CSSRuleObject, PluginAPI } from 'tailwindcss/types/config'
-
-import { addDynamicIconSelectors } from '@iconify/tailwind'
-import typography from '@tailwindcss/typography'
-
-require('./cssAsPlugin')
+import { neutral } from 'tailwindcss/colors'
 
 const UIKitColors = {
   red: {
@@ -224,6 +223,7 @@ const twConfig: Config = {
 
       colors: {
         uk: UIKitColors,
+        muted: neutral,
 
         themed: {
           bg_opacity: 'var(--bg-opacity)',
@@ -240,11 +240,8 @@ const twConfig: Config = {
           'color-scheme': 'light',
           // 浅葱
           primary: '#33A6B8',
-
           secondary: '#A8D8B9',
-
           accent: '#33A6B8',
-
           'accent-content': '#fafafa',
 
           neutral: UIKitColors.grey3.light,
@@ -291,8 +288,11 @@ const twConfig: Config = {
   },
 
   plugins: [
-    addDynamicIconSelectors(),
-    addShortcutPlugin,
+    iconsPlugin({
+      collections: {
+        ...getIconCollections(['mingcute', 'material-symbols']),
+      },
+    }),
 
     typography,
     daisyui,
@@ -300,42 +300,13 @@ const twConfig: Config = {
     require('tailwind-scrollbar'),
     require('@tailwindcss/container-queries'),
     require('tailwindcss-animated'),
+    require('tailwindcss-animate'),
+    require('tailwindcss-motion'),
 
     require('./src/styles/theme.css'),
     require('./src/styles/layer.css'),
+    require('./src/styles/animation.css'),
   ],
-}
-
-function addShortcutPlugin({ addUtilities }: PluginAPI) {
-  const styles: CSSRuleObject = {
-    '.content-auto': {
-      'content-visibility': 'auto',
-    },
-    '.shadow-out-sm': {
-      'box-shadow':
-        '0 0 10px rgb(120 120 120 / 10%), 0 5px 20px rgb(120 120 120 / 20%)',
-    },
-    '.backface-hidden': {
-      '-webkit-backface-visibility': 'hidden',
-      '-moz-backface-visibility': 'hidden',
-      '-webkit-transform': 'translate3d(0, 0, 0)',
-      '-moz-transform': 'translate3d(0, 0, 0)',
-    },
-    '.center': {
-      'align-items': 'center',
-      'justify-content': 'center',
-    },
-    '.fill-content': {
-      'min-height': `calc(100vh - 17.5rem)`,
-    },
-    '.card-shadow': {
-      'box-shadow': '0 0 0 1px rgba(0,0,0,.08),0 4px 6px rgba(0,0,0,.04)',
-    },
-    '.card-shadow:hover': {
-      'box-shadow': '0 0 0 1px rgba(0,0,0,.08),0 6px 14px rgba(0,0,0,.08)',
-    },
-  }
-  addUtilities(styles)
 }
 
 export default withTV(twConfig)

@@ -1,7 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import React, { memo } from 'react'
+import * as React from 'react'
+import { memo } from 'react'
 
 import { FloatPopover } from '~/components/ui/float-popover'
 import { clsxm } from '~/lib/helper'
@@ -29,10 +30,7 @@ export const MenuPopover: Component<{
       ])}
       triggerElement={<>{children}</>}
     >
-      {subMenu.length > 0 &&
-        subMenu.map((m) => {
-          return <Item key={m.title} {...m} />
-        })}
+      {subMenu.length > 0 && subMenu.map((m) => <Item key={m.title} {...m} />)}
     </FloatPopover>
   )
 })

@@ -1,4 +1,5 @@
 import { getWebUrl } from '~/atoms'
+import { allowedBangumiTypes } from '~/lib/bangumi'
 
 import { isClientSide, isDev } from './env'
 
@@ -10,6 +11,17 @@ const GITHUB_HOST = 'github.com'
 
 export const isLeetCodeUrl = (url: URL) => {
   return url.hostname === 'leetcode.cn' || url.hostname === 'leetcode.com'
+}
+
+export const isQQMusicSongUrl = (url: URL) => {
+  return url.hostname === 'y.qq.com' && url.pathname.includes('/songDetail/')
+}
+
+export const isNeteaseMusicSongUrl = (url: URL) => {
+  return (
+    url.hostname === 'music.163.com' &&
+    (url.pathname.includes('/song') || url.hash.includes('/song'))
+  )
 }
 
 export const isGithubRepoUrl = (url: URL) => {
@@ -109,6 +121,14 @@ export const isWikipediaUrl = (url: URL) => {
 
 export const isTMDBUrl = (url: URL) => {
   return url.hostname.includes('themoviedb.org')
+}
+
+export const isBangumiUrl = (url: URL) => {
+  const pathname = url.pathname.split('/').slice(1)
+  return (
+    (url.hostname === 'bgm.tv' || url.hostname === 'bangumi.tv') &&
+    allowedBangumiTypes.includes(pathname[0])
+  )
 }
 
 export const isNpmUrl = (url: URL) => {

@@ -6,12 +6,7 @@ import { createFetch } from 'ofetch'
 
 import PKG from '~/../package.json'
 
-import {
-  ClerkCookieKey,
-  createApiClient,
-  createFetchAdapter,
-  TokenKey,
-} from './shared'
+import { createApiClient, createFetchAdapter, TokenKey } from './shared'
 
 const isDev = process.env.NODE_ENV === 'development'
 export const $fetch = createFetch({
@@ -20,11 +15,16 @@ export const $fetch = createFetch({
 
     onRequest(context) {
       const cookie = cookies()
-      const clerkJwt = cookie.get(ClerkCookieKey)?.value
 
-      const token = cookie.get(TokenKey)?.value || clerkJwt
+      const token = cookie.get(TokenKey)?.value
 
-      const headers: any = context.options.headers ?? {}
+      // eslint-disable-next-line prefer-destructuring
+      let headers: any = context.options.headers
+      if (headers && headers instanceof Headers) {
+        headers = Object.fromEntries(headers.entries())
+      } else {
+        headers = {}
+      }
       if (token) {
         headers['Authorization'] = `bearer ${token}`
       }

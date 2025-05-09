@@ -1,8 +1,8 @@
 'use client'
 
-import { m } from 'framer-motion'
+import { m } from 'motion/react'
 import Link from 'next/link'
-import React from 'react'
+import * as React from 'react'
 
 import { Divider } from '~/components/ui/divider'
 import { RelativeTime } from '~/components/ui/relative-time'
@@ -52,7 +52,7 @@ export const ActivityPostList = () => {
         className="flex items-center justify-end opacity-70 duration-200 hover:text-accent"
         href={routeBuilder(Routes.Posts, {})}
       >
-        <i className="icon-[mingcute--arrow-right-circle-line]" />
+        <i className="i-mingcute-arrow-right-circle-line" />
         <span className="ml-2">还有更多</span>
       </Link>
 
@@ -85,7 +85,7 @@ export const ActivityPostList = () => {
         className="flex items-center justify-end opacity-70 duration-200 hover:text-accent"
         href={routeBuilder(Routes.Timelime, { type: 'note' })}
       >
-        <i className="icon-[mingcute--arrow-right-circle-line]" />
+        <i className="i-mingcute-arrow-right-circle-line" />
         <span className="ml-2">还有更多</span>
       </Link>
     </m.section>

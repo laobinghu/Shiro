@@ -1,6 +1,13 @@
 import { atom, useStore } from 'jotai'
 import type { FC, PropsWithChildren, ReactNode } from 'react'
-import React, { useEffect, useMemo, useState } from 'react'
+import * as React from 'react'
+import {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useMemo,
+  useState,
+} from 'react'
 import { Drawer } from 'vaul'
 
 import { SheetContext } from './context'
@@ -19,9 +26,14 @@ export interface PresentSheetProps {
 
 export const sheetStackAtom = atom([] as HTMLDivElement[])
 
-export const PresentSheet: FC<PropsWithChildren<PresentSheetProps>> = (
-  props,
-) => {
+export type SheetRef = {
+  dismiss: () => void
+}
+
+export const PresentSheet = forwardRef<
+  SheetRef,
+  PropsWithChildren<PresentSheetProps>
+>((props, ref) => {
   const {
     content,
     children,
@@ -33,6 +45,12 @@ export const PresentSheet: FC<PropsWithChildren<PresentSheetProps>> = (
   } = props
 
   const [isOpen, setIsOpen] = useState(props.open ?? defaultOpen)
+
+  useImperativeHandle(ref, () => ({
+    dismiss: () => {
+      setIsOpen(false)
+    },
+  }))
 
   const nextRootProps = useMemo(() => {
     const nextProps = {
@@ -81,7 +99,9 @@ export const PresentSheet: FC<PropsWithChildren<PresentSheetProps>> = (
 
   return (
     <Root dismissible={dismissible} {...nextRootProps}>
-      <Drawer.Trigger asChild={triggerAsChild}>{children}</Drawer.Trigger>
+      {!!children && (
+        <Drawer.Trigger asChild={triggerAsChild}>{children}</Drawer.Trigger>
+      )}
       <Drawer.Portal>
         <Drawer.Content
           style={{
@@ -124,4 +144,4 @@ export const PresentSheet: FC<PropsWithChildren<PresentSheetProps>> = (
       </Drawer.Portal>
     </Root>
   )
-}
+})

@@ -61,7 +61,7 @@ export const CommentBatchActionGroup = () => {
                 batchChangeState(CommentState.Read)
               }}
             >
-              <i className="icon-[mingcute--check-fill] size-5" />
+              <i className="i-mingcute-check-fill size-5" />
             </RoundedIconButton>
           }
         >
@@ -80,7 +80,7 @@ export const CommentBatchActionGroup = () => {
                 batchChangeState(CommentState.Junk)
               }}
             >
-              <i className="icon-[mingcute--delete-2-line] size-5" />
+              <i className="i-mingcute-delete-2-line size-5" />
             </RoundedIconButton>
           }
         >
@@ -96,24 +96,22 @@ export const CommentBatchActionGroup = () => {
             onClick={() => {
               present({
                 title: `删除 ${selectionKeys.size} 条评论`,
-                content: ({ dismiss }) => {
-                  return (
-                    <div className="w-[400px] text-right">
-                      <StyledButton
-                        onClick={() => {
-                          batchDelete()
-                          dismiss()
-                        }}
-                      >
-                        删除
-                      </StyledButton>
-                    </div>
-                  )
-                },
+                content: ({ dismiss }) => (
+                  <div className="w-[400px] text-right">
+                    <StyledButton
+                      onClick={() => {
+                        batchDelete()
+                        dismiss()
+                      }}
+                    >
+                      删除
+                    </StyledButton>
+                  </div>
+                ),
               })
             }}
           >
-            <i className="icon-[mingcute--close-line] size-5" />
+            <i className="i-mingcute-close-line size-5" />
           </RoundedIconButton>
         }
       >

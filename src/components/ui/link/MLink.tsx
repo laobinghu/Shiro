@@ -78,7 +78,7 @@ export const MLink: FC<{
         {children}
       </a>
 
-      <i className="icon-[mingcute--arrow-right-up-line] translate-y-[2px] opacity-70" />
+      <i className="i-mingcute-arrow-right-up-line translate-y-[2px] opacity-70" />
     </span>
   )
   if (!popper) return el
@@ -87,6 +87,7 @@ export const MLink: FC<{
       as="span"
       wrapperClassName="!inline"
       type="tooltip"
+      offset={0}
       triggerElement={el}
     >
       <a href={href} target="_blank" rel="noreferrer">
@@ -101,7 +102,7 @@ const BizSelfFavicon = () => {
   const { favicon, faviconDark } = useAppConfigSelector((a) => a.site) || {}
   if (!favicon && !faviconDark) return null
   return (
-    <span className="mr-1 inline-flex size-4 center">
+    <span className="center mr-1 inline-flex size-4">
       <img
         className="inline size-4 dark:hidden"
         src={favicon ? favicon : faviconDark ? faviconDark : ''}

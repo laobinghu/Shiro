@@ -28,15 +28,15 @@ export const TocFAB = () => {
     })
   }, [])
   const presentToc = useCallback(() => {
-    const dispose = present({
+    present({
       title: '文章目录',
       clickOutsideToDismiss: true,
-      content: () => (
+      content: ({ dismiss }) => (
         <TocTree
           $headings={$headings!}
           className="max-h-full space-y-3 overflow-y-auto [&>li]:py-1"
           onItemClick={() => {
-            dispose()
+            dismiss()
           }}
           scrollInNextTick
         />
@@ -48,7 +48,7 @@ export const TocFAB = () => {
 
   return (
     <FABPortable aria-label="Show ToC" onClick={presentToc}>
-      <i className="icon-[mingcute--list-expansion-line]" />
+      <i className="i-mingcute-list-expansion-line" />
     </FABPortable>
   )
 }

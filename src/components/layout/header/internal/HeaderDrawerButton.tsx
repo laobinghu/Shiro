@@ -9,8 +9,8 @@ import { HeaderDrawerContent } from './HeaderDrawerContent'
 export const HeaderDrawerButton = () => {
   const isClient = useIsClient()
   const ButtonElement = (
-    <HeaderActionButton>
-      <i className="icon-[mingcute--menu-line]" />
+    <HeaderActionButton aria-label="header draw button">
+      <i className="i-mingcute-menu-line" />
     </HeaderActionButton>
   )
   if (!isClient) return ButtonElement

@@ -3,8 +3,8 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import { useQuery } from '@tanstack/react-query'
 import clsx from 'clsx'
-import { AnimatePresence, m } from 'framer-motion'
 import { atom, useAtomValue, useSetAtom } from 'jotai'
+import { AnimatePresence, m } from 'motion/react'
 import Link from 'next/link'
 import type { KeyboardEventHandler } from 'react'
 import {
@@ -41,7 +41,7 @@ export const SearchFAB = () => {
           jotaiStore.set(searchPanelOpenAtom, true)
         }}
       >
-        <i className="icon-[mingcute--search-line]" />
+        <i className="i-mingcute-search-line" />
       </FABPortable>
     </>
   )
@@ -82,7 +82,7 @@ const SearchPanel = () => {
         {panelOpen && (
           <Dialog.Portal>
             <Dialog.Content>
-              <div className="fixed inset-0 z-20 flex center">
+              <div className="center fixed inset-0 z-20 flex">
                 <div
                   className="fixed inset-0 z-[-1]"
                   onClick={() => {
@@ -131,43 +131,46 @@ const SearchPanelImpl = () => {
         },
       })
     },
-    select: useCallback((data: any) => {
-      if (!data?.data) {
-        return
-      }
-
-      const _list: SearchListType[] = data?.data.map((item: any) => {
-        switch (item.type) {
-          case 'post': {
-            return {
-              title: item.title,
-              subtitle: item.category.name,
-              id: item.id,
-              url: `/posts/${item.category.slug}/${item.slug}`,
-            }
-          }
-          case 'note': {
-            return {
-              title: item.title,
-              subtitle: '手记',
-              id: item.id,
-              url: `/notes/${item.nid}`,
-            }
-          }
-          case 'page': {
-            return {
-              title: item.title,
-              subtitle: '页面',
-              id: item.id,
-              url: `/pages/${item.slug}`,
-            }
-          }
+    select: useCallback(
+      (data: any) => {
+        if (!data?.data) {
+          return
         }
-      })
-      setCurrentSelect(0)
 
-      return _list
-    }, []),
+        const _list: SearchListType[] = data?.data.map((item: any) => {
+          switch (item.type) {
+            case 'post': {
+              return {
+                title: item.title,
+                subtitle: item.category.name,
+                id: item.id,
+                url: `/posts/${item.category.slug}/${item.slug}`,
+              }
+            }
+            case 'note': {
+              return {
+                title: item.title,
+                subtitle: '手记',
+                id: item.id,
+                url: `/notes/${item.nid}`,
+              }
+            }
+            case 'page': {
+              return {
+                title: item.title,
+                subtitle: '页面',
+                id: item.id,
+                url: `/${item.slug}`,
+              }
+            }
+          }
+        })
+        setCurrentSelect(0)
+
+        return _list
+      },
+      [setCurrentSelect],
+    ),
   })
   const data = _data || noopArr
   const handleKeyDown: KeyboardEventHandler<HTMLDivElement> = useCallback(
@@ -263,7 +266,7 @@ const SearchPanelImpl = () => {
             <div className="flex h-full items-center justify-center">
               <div className="flex flex-col items-center space-y-2">
                 {!keyword ? (
-                  <i className="icon-[mingcute--search-line] text-[60px]" />
+                  <i className="i-mingcute-search-line text-[60px]" />
                 ) : (
                   <EmptyIcon />
                 )}
@@ -281,7 +284,7 @@ const SearchPanelImpl = () => {
           )}
 
           {data.length === 0 && isLoading && (
-            <div className="flex h-full grow center">
+            <div className="center flex h-full grow">
               <div className="loading loading-spinner" />
             </div>
           )}
@@ -300,9 +303,7 @@ const SearchPanelImpl = () => {
             <FloatPopover
               mobileAsSheet
               type="tooltip"
-              triggerElement={
-                <i className="icon-[mingcute--download-2-line]" />
-              }
+              triggerElement={<i className="i-mingcute-download-2-line" />}
             >
               下载搜索索引文件以便导入 algolia 搜索
             </FloatPopover>
@@ -342,7 +343,7 @@ const SearchItem = memo(function Item({
     <li
       className={clsx(
         'relative flex w-full justify-between px-1',
-        'before:absolute before:inset-0 before:rounded-md before:content-auto',
+        'before:content-auto before:absolute before:inset-0 before:rounded-md',
         'before:z-0 hover:before:bg-zinc-200/80 dark:hover:before:bg-zinc-800/80',
         isSelect && 'before:bg-zinc-200/80 dark:before:bg-zinc-800/80',
       )}

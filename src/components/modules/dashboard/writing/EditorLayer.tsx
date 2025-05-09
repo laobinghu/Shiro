@@ -1,6 +1,6 @@
 import type { FC, ReactNode } from 'react'
 
-import { useIsMobile } from '~/atoms/hooks'
+import { useIsMobile } from '~/atoms/hooks/viewport'
 import { RootPortal } from '~/components/ui/portal'
 import { clsxm } from '~/lib/helper'
 
@@ -38,7 +38,7 @@ export const EditorLayer: FC<{
           mainClassName,
         )}
       >
-        <div className="flex grow flex-col overflow-auto">{ContentEl}</div>
+        <div className="flex grow flex-col overflow-hidden">{ContentEl}</div>
 
         {FooterEl}
       </main>

@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { produce } from 'immer'
-import React from 'react'
+import * as React from 'react'
 
 import type { SelectValue } from '~/components/ui/select'
 import { Select } from '~/components/ui/select'
@@ -20,11 +20,11 @@ export const TopicSelector = () => {
   const handleSelectionChange = useEventCallback((newCategoryId: string) => {
     if (newCategoryId === categoryId) return
 
-    setter((prev) => {
-      return produce(prev, (draft) => {
+    setter((prev) =>
+      produce(prev, (draft) => {
         draft.topicId = newCategoryId
-      })
-    })
+      }),
+    )
   })
 
   const selectValues: SelectValue<string>[] = (data || []).map((item) => ({

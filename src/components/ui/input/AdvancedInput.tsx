@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import type { ContextType, FC, PropsWithChildren } from 'react'
-import React, { createContext, useContext, useEffect, useId } from 'react'
+import * as React from 'react'
+import { createContext, useContext, useEffect, useId } from 'react'
 import { tv } from 'tailwind-variants'
 
 import { clsxm } from '~/lib/helper'
@@ -177,8 +178,8 @@ export const AdvancedInput = React.forwardRef<
                   'text-lg text-gray-500',
 
                   isPasswordVisible
-                    ? 'icon-[mingcute--eye-line]'
-                    : 'icon-[mingcute--eye-close-line]',
+                    ? 'i-mingcute-eye-line'
+                    : 'i-mingcute-eye-close-line',
                 )}
               />
             </MotionButtonBase>

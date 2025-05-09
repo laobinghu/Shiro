@@ -4,7 +4,7 @@ import { clsx } from 'clsx'
 import type { MarkdownToJSX } from 'markdown-to-jsx'
 import { compiler, sanitizeUrl } from 'markdown-to-jsx'
 import Script from 'next/script'
-import type React from 'react'
+import type * as React from 'react'
 import type { FC, PropsWithChildren } from 'react'
 import { Fragment, memo, Suspense, useMemo, useRef } from 'react'
 
@@ -275,7 +275,7 @@ export const Markdown: FC<MdProps & MarkdownToJSX.Options & PropsWithChildren> =
                 <Tag key={state?.key} start={node.start}>
                   {node.items.map((item: any, i: number) => {
                     let className = ''
-                    if (item[0]?.type == 'gfmTask') {
+                    if (item[0]?.type === 'gfmTask') {
                       className = 'list-none flex items-center'
                     }
 

@@ -9,6 +9,7 @@ interface Props {
 }
 export const GoToAdminEditingButton: Component<Props> = (props) => {
   const isLogin = useIsLogged()
+  console.log(isLogin)
   const resolveAdminUrl = useResolveAdminUrl()
   const { id, type, className } = props
   if (!isLogin) return null
@@ -26,7 +27,7 @@ export const GoToAdminEditingButton: Component<Props> = (props) => {
       )}
       rel="noreferrer"
     >
-      <i className="icon-[mingcute--quill-pen-line]" />
+      <i className="i-mingcute-quill-pen-line" />
       <span className="sr-only">编辑</span>
     </a>
   )
