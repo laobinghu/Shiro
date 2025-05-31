@@ -8,12 +8,12 @@ import {
   FaSolidDotCircle,
   FaSolidFeatherAlt,
   FaSolidHistory,
+  FaSolidSubway,
   FaSolidUserFriends,
   IcTwotoneSignpost,
   IonBook,
   MdiFlask,
   MdiLightbulbOn20,
-  RMixPlanet,
 } from '~/components/icons/menu-collection'
 
 export interface IHeaderMenu {
@@ -103,9 +103,9 @@ export const headerMenuConfig: IHeaderMenu[] = [
         icon: h(FaSolidComments),
       },
       {
-        title: '跃迁',
-        icon: h(RMixPlanet),
-        path: 'https://travel.moe/go.html',
+        title: '开往',
+        icon: h(FaSolidSubway),
+        path: 'https://www.travellings.cn/go.html',
       },
     ],
   },

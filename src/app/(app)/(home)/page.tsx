@@ -12,6 +12,7 @@ import {
   FaSolidComments,
   FaSolidFeatherAlt,
   FaSolidHistory,
+  FaSolidSubway,
   FaSolidUserFriends,
   IcTwotoneSignpost,
   MdiFlask,
@@ -255,8 +256,8 @@ const windsock = [
   },
   {
     title: '跃迁',
-    icon: RMixPlanet,
-    path: 'https://travel.moe/go.html',
+    icon: FaSolidSubway,
+    path: 'https://www.travellings.cn/go.html',
   },
 ]
 
